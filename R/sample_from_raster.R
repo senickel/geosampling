@@ -12,13 +12,12 @@
 #' @importFrom magrittr %>%
 #'
 #'
-sample_from_raster<-function(
-  raster_file,
-  poly_shape,
-  sample_size=20,
-  seed=1337,
-  check_raster=NULL) {
-
+sample_from_raster<-function(raster_file,
+                             poly_shape,
+                             sample_size=20,
+                             seed=1337,
+                             check_raster=NULL,
+                             verbose=2) {
   set.seed(seed)
   poly_shape_sf<-st_as_sf(poly_shape)
 
@@ -71,9 +70,9 @@ sample_from_raster<-function(
     loop_counter<-0
     while(sample_size2>0) {
       loop_counter<-loop_counter +1
-      message(paste("Loop:",loop_counter,
-                    "\nNeeds to pick:",sample_size2,"units",
-                    "\nUnits left:",length(poly2)))
+      if (verbose==2) message(paste("Loop:",loop_counter,
+                                    "\nNeeds to pick:",sample_size2,"units",
+                                    "\nUnits left:",length(poly2)))
 
       drawn_sample2<-draw_sample(poly = poly2,
                                  raster_file = raster_file,
@@ -106,7 +105,7 @@ sample_from_raster<-function(
       poly2<-poly2[!poly2$id%in%drawn_sample2,]
       if (length(poly2)==0) break
     }
-    message(paste("Picked",length(drawn_sample),"units"))
+    if (verbose==2) message(paste("Picked",length(drawn_sample),"units"))
   }
   return(poly[drawn_sample,])
 }

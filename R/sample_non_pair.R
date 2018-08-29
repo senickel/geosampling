@@ -15,11 +15,15 @@
 
 sample_non_pair<-function(
   sampling_bins, # polygon file
+  # blue_raster_complete, # 5k raster file
   red_raster_complete,
   yellow_raster_complete,
   min_red=1, # how many units per bin are going to be sampled at least
+  # sample_blue=50, # total number of blue units
   sample_red=200, # number of red units per blue unit
-  random_number) {
+  # sample_yellow=2,
+  random_number,
+  verbose=2) {
 
   min_red<-min_red %>%
     as.numeric
@@ -64,7 +68,7 @@ sample_non_pair<-function(
 
   # loop over bins
   lapply(1:nrow(red_bins),function(rb1) {
-    message(paste("Bin",rb1))
+    if (verbose>0) message(paste("Bin",rb1))
     rb<-red_bins[rb1,] %>%
       unlist
     poly_shape<-sampling_bins[rb[1],] # select bin
@@ -91,7 +95,7 @@ sample_non_pair<-function(
     cover_values<-cover_val(getValues(raster_part_red_cover))
 
     # cover_values<-ifelse(getValues(raster_part_red_cover)<30,0,
-                         # getValues(raster_part_red_cover))
+    # getValues(raster_part_red_cover))
 
     # reduce the number of people living in that pixel by the coverage
     # so that we do not assume that a pixel has a lot of people in it if it
@@ -112,7 +116,8 @@ sample_non_pair<-function(
       poly_shape = poly_shape,
       sample_size = rb[2],
       seed = random_number,
-      check_raster=yellow_raster) %>%
+      check_raster=yellow_raster,
+      verbose=verbose) %>%
       reshape_poly(poly_before = poly_shape, # add ids, prob, pop and unify colnames
                    name_of_unit = "red")
 
