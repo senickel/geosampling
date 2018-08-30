@@ -23,7 +23,8 @@ sample_pair<-function(
   min_blue=1, # how many units per bin are going to be sampled at least
   sample_blue=100, # total number of blue units
   sample_red=2, # number of red units per blue unit
-  random_number) {
+  random_number,
+  verbose=2) {
 
   min_blue<-min_blue %>%
     as.numeric
@@ -142,7 +143,7 @@ sample_pair<-function(
 
   # loop over bins
   picked1<-lapply(1:nrow(blue_bins),function(bb1) {
-    message(paste("Bin",bb1))
+    if (verbose>0) message(paste("Bin",bb1))
     bb<-blue_bins[bb1,] %>%
       unlist
     poly_shape<-sampling_bins[bb[1],] # select bin
@@ -189,7 +190,8 @@ sample_pair<-function(
       poly_shape = poly_shape,
       sample_size = bb[2],
       seed = random_number,
-      check_raster=yellow_raster) %>%
+      check_raster=yellow_raster,
+      verbose=verbose) %>%
       reshape_poly(poly_before = poly_shape, # add ids, prob, pop and unify colnames
                    name_of_unit = "blue")
 
