@@ -40,17 +40,87 @@ sample_pair<-function(
     (length(sampling_bins))*
     min_blue
   #
-  if (random_blues>0) {
-    blue_bins_random<-sample(
-      1:length(sampling_bins), # number of bins
-      random_blues, # number of blue units that needs to be sampled
-      prob = sampling_bins$prob, # probability of sampling bins
-      replace=TRUE) %>%   # sampling WITH replacement because
-      # blue units can land in the same bin
-      table %>% # frequency table
-      c %>%
-      data.frame(frequency=.,number=names(.) %>%
-                   as.numeric) # make a data.frame out of frequency table
+
+
+  if (random_blues>0) { # only execute if there are blue units to be collected
+
+    ## making sure that if there are not enough units in one bin,
+    # to sample the difference from the other bins
+
+    sampling_df<-lapply(1:length(sampling_bins),function(x) {
+
+      poly_shape<-sampling_bins[x,] # select bin
+      # add ids etc.
+      poly_shape$bin_id<-x
+      poly_shape@data<-poly_shape@data %>%
+        dplyr::select(-X1) %>%
+        rename(bin_population=pop,
+               bin_probability=prob)
+      poly_shape$is_bin<-TRUE
+
+      raster_part_blue_crop<-
+        crop(blue_raster_complete,poly_shape) # crop 5k raster to bin
+
+      raster_part_blue_cover<-            # define how much of the pixels are
+        rasterize(poly_shape,             # covered by the bin.
+                  raster_part_blue_crop,
+                  getCover=TRUE)
+
+      cover_values<-cover_val(getValues(raster_part_blue_cover))
+      data.frame(bin=x,diff=0,amount=cover_values[cover_values>0] %>%
+                   length,reached=FALSE)
+
+    }) %>%
+      do.call(rbind,.)
+
+    # substract minimum amount because its added later on
+    sampling_df$amount<-sampling_df$amount-min_blue
+
+    # prep for loop
+    sampling_df2<-sampling_df
+    sample_blues<-random_blues
+    end_draw<-data.frame(Freq=0,number=1:6)
+
+    while(sample_blues>0) {
+
+      drawn_blue_bins<-sample(
+        which(!sampling_df2$reached), # number of bins
+        sample_blues, # number of blue units that needs to be sampled
+        prob = sampling_bins$prob[which(!sampling_df2$reached)], # probability of sampling bins
+        replace=TRUE) %>%   # sampling WITH replacement because
+        # blue units can land in the same bin
+        table %>% # frequency table
+        c %>%
+        data.frame(frequency=.,number=names(.) %>%
+                     as.numeric)
+
+      middle_draw<-full_join(drawn_blue_bins,end_draw,by="number") %>%
+        mutate(frequency=ifelse(is.na(frequency),0,frequency)) %>%
+        arrange(number) %>%
+        mutate(Freq=Freq+frequency) %>%
+        dplyr::select(-frequency)
+
+
+
+      sampling_df3<-cbind(sampling_df2,
+                          middle_draw) %>%
+        mutate(diff=ifelse(Freq>amount,amount,Freq),
+               reached=diff==amount)
+
+      end_draw<-sampling_df3 %>%
+        dplyr::select(number,diff) %>%
+        rename(Freq=diff)
+
+      sampling_df2<-sampling_df3 %>%
+        dplyr::select(bin,diff,amount,reached)
+
+      sample_blues<-sample_blues-sum(sampling_df2$diff)
+
+    }
+
+    blue_bins_random<-end_draw %>%
+      rename(frequency=Freq)
+
   } else {
     blue_bins_random<-data.frame(frequency=0,number=1:length(sampling_bins))
   }
@@ -69,7 +139,7 @@ sample_pair<-function(
 
 
   # loop over bins
-  lapply(1:nrow(blue_bins),function(bb1) {
+  picked1<-lapply(1:nrow(blue_bins),function(bb1) {
     message(paste("Bin",bb1))
     bb<-blue_bins[bb1,] %>%
       unlist
@@ -167,3 +237,7 @@ sample_pair<-function(
     do.call(bind,.)
 
 }
+
+
+
+
