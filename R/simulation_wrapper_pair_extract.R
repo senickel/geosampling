@@ -36,7 +36,8 @@ simulation_wrapper_pair_extract<-function(selected_part,
     min_blue = original_min_blue,
     sample_blue= original_sample_blue,
     sample_red=2,
-    random_number = random_number)
+    random_number = random_number,
+    verbose=verbose)
 
   normal_sample2<-data_normalization_pair(
     sample_obj = normal_sample1,
