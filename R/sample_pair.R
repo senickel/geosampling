@@ -213,7 +213,8 @@ sample_pair<-function(
 
                          sample_size = sample_red,
                          seed = random_number,
-                         check_raster = yellow_raster2) %>%
+                         check_raster = yellow_raster2,
+                         verbose=verbose) %>%
         reshape_poly(poly_before = selected_blues[i,], # add ids, prob, pop and unify colnames
                      name_of_unit = "red")
     }) %>%
