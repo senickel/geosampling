@@ -5,7 +5,7 @@
 \title{sample_from_raster}
 \usage{
 sample_from_raster(raster_file, poly_shape, sample_size = 20,
-  seed = 1337, check_raster = NULL)
+  seed = 1337, check_raster = NULL, verbose = 2)
 }
 \description{
 sample_from_raster

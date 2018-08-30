@@ -5,7 +5,7 @@
 \title{sample_non_pair}
 \usage{
 sample_non_pair(sampling_bins, red_raster_complete, yellow_raster_complete,
-  min_red = 1, sample_red = 200, random_number)
+  min_red = 1, sample_red = 200, random_number, verbose = 2)
 }
 \description{
 sample_non_pair
