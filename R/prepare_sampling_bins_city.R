@@ -12,7 +12,14 @@
 #'
 prepare_sampling_bins_city<-function(adm0,coords,lakes) {
   p4s<-proj4string(adm0)
+
+  if (any(is.na(as.numeric(coords)))) stop("Coordinates are not numeric.")
+  if (!is(adm0,"SpatialPolygons")) stop("adm0 is not a SpatialPolygon")
+  if (!is(lakes,"SpatialPolygons")) stop("lakes is not a SpatialPolygon")
+
+
   city=coords %>%
+    as.numeric %>%
     SpatialPoints(proj4string = CRS(p4s))
 
   part_0_to_25_1=prepare_area_city(adm0,city,lakes,width_in_km = 25)
