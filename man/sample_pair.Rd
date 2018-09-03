@@ -6,7 +6,7 @@
 \usage{
 sample_pair(sampling_bins, blue_raster_complete, red_raster_complete,
   yellow_raster_complete, min_blue = 1, sample_blue = 100,
-  sample_red = 2, random_number)
+  sample_red = 2, random_number, verbose = 2)
 }
 \description{
 sample_pair

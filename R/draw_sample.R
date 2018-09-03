@@ -10,7 +10,6 @@
 #' @keywords
 #' @export
 #' @examples
-#' checking.nominal()
 #' @importFrom magrittr %>%
 #'
 #'

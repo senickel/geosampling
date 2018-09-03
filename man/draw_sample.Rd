@@ -10,6 +10,3 @@ draw_sample(poly, raster_file, index, probability, orig_sample_size,
 \description{
 draw_sample
 }
-\examples{
-checking.nominal()
-}
