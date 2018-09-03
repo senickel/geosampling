@@ -3,6 +3,8 @@
 #' @param adm0
 #' @param coords
 #' @param lakes
+#' @param radius_inner_circle in km
+#' @param radius_outer_circle in km
 #' @keywords
 #' @keywords
 #' @export
@@ -10,7 +12,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %>%
 #'
-prepare_sampling_bins_city<-function(adm0,coords,lakes) {
+prepare_sampling_bins_city<-function(adm0,coords,lakes,radius_inner_circle=25,radius_outer_circle=50) {
   p4s<-proj4string(adm0)
 
   if (any(is.na(suppressWarnings(as.numeric(coords))))) stop("Coordinates are not numeric.")
@@ -28,12 +30,12 @@ prepare_sampling_bins_city<-function(adm0,coords,lakes) {
   city<-coords %>%
     SpatialPoints(proj4string = CRS(p4s))
 
-  part_0_to_25_1=prepare_area_city(adm0,city,lakes,width_in_km = 25)
+  part_0_to_25_1=prepare_area_city(adm0,city,lakes,width_in_km = radius_inner_circle)
 
   part_0_to_25=prepare_border_polygon(part_0_to_25_1,adm0,lakes)
 
 
-  part_25_to_50_1=prepare_area_city(adm0,city,lakes,width_in_km = 50)
+  part_25_to_50_1=prepare_area_city(adm0,city,lakes,width_in_km = radius_outer_circle)
 
   part_25_to_50_2=prepare_border_polygon(part_25_to_50_1,adm0,lakes)
 
