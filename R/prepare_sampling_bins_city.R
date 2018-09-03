@@ -26,7 +26,7 @@ prepare_sampling_bins_city<-function(adm0,coords,lakes) {
     city=coords %>%
       as.numeric %>%
       SpatialPoints(proj4string = CRS(p4s))
-  } if else (is.data.frame(coords)|is.vector(coords)) {
+  } else if (is.data.frame(coords)|is.vector(coords)) {
     city=coords %>%
       as.numeric %>%
       as.matrix %>%
