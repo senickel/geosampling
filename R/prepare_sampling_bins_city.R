@@ -22,20 +22,17 @@ prepare_sampling_bins_city<-function(adm0,coords,lakes) {
   if (!is(adm0,"SpatialPolygons")) stop("adm0 is not a SpatialPolygon")
   if (!is(lakes,"SpatialPolygons")) stop("lakes is not a SpatialPolygon")
 
-  if (is.matrix(coords))  {
-    city=coords %>%
-      as.numeric %>%
-      SpatialPoints(proj4string = CRS(p4s))
-  } else if (is.data.frame(coords)|is.vector(coords)) {
-    city=coords %>%
+ if (is.data.frame(coords)|is.vector(coords)) {
+    coords<-coords %>%
       as.numeric %>%
       as.matrix %>%
-      t %>%
-      SpatialPoints(proj4string = CRS(p4s))
-  } else {
+      t
+  } else if (!is.matrix(coords)) {
     stop("coords must be a vector of length 2, a matrix of dim(1,2), or a data.frame of dim(1,2)")
   }
-
+  city<-coords %>%
+    as.numeric %>%
+    SpatialPoints(proj4string = CRS(p4s))
 
   part_0_to_25_1=prepare_area_city(adm0,city,lakes,width_in_km = 25)
 
