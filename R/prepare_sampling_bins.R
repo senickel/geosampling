@@ -28,7 +28,7 @@ prepare_sampling_bins<-function(a,b,start_end,number_of_bins=5) {
 
   global_line<-new_line_thru_math(line1_math,c(-180,180),p4s)
 
-    refined_line1<-crop(global_line,line1_spatial)
+  refined_line1<-crop(global_line,line1_spatial)
 
   # now shift line by 100k to the right and to the left
   # first take a point of refined_line1
@@ -84,9 +84,6 @@ prepare_sampling_bins<-function(a,b,start_end,number_of_bins=5) {
 
   points_on_par2<-data.frame(x=x_coords_par2,
                              y=par2_line_math[2]*x_coords_par2+par2_line_math[1])
-
-
-
 
   bins1<-lapply(1:(nrow(points_on_par1)-1),function(x) {
     rbind(points_on_par1[x:(x+1),],
