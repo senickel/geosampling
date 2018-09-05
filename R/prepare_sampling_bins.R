@@ -18,7 +18,7 @@ prepare_sampling_bins<-function(a,b,start_end,number_of_bins=5) {
 
   ex_matrix<-extent(polygon) %>%
     as.matrix
-
+  message(ex_matrix)
   extent_polygon<-extent_to_polygon(polygon)
 
   line1_spatial<-start_end %>%
