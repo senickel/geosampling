@@ -4,7 +4,7 @@
 \alias{extent_to_polygon}
 \title{extent_to_polygon}
 \usage{
-extent_to_polygon(exobj)
+extent_to_polygon(shape)
 }
 \description{
 extent_to_polygon
