@@ -7,10 +7,10 @@
 #' @examples
 #' @importFrom magrittr %>%
 #'
-extent_to_polygon <- function(exobj) {
+extent_to_polygon <- function(shape) {
 
-  if (is(exobj,"SpatialPolygons")) exobj <- extent(exobj)
-  if (!is(exobj,"Extent")) stop("exobj is neither SpatialPolygons nor Extent")
+  if (!is(shape,"SpatialPolygons")) stop("exobj is not SpatialPolygons")
+    exobj <- extent(shape)
 
   data.frame(long=c(exobj[1],exobj[1],exobj[2],exobj[2]),
              lat=c(exobj[3],exobj[4],exobj[4],exobj[3])) %>%
