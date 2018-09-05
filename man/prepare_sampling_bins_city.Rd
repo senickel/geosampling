@@ -4,7 +4,13 @@
 \alias{prepare_sampling_bins_city}
 \title{prepare_sampling_bins_city}
 \usage{
-prepare_sampling_bins_city(adm0, coords, lakes)
+prepare_sampling_bins_city(adm0, coords, lakes, radius_inner_circle = 25,
+  radius_outer_circle = 50)
+}
+\arguments{
+\item{radius_inner_circle}{in km}
+
+\item{radius_outer_circle}{in km}
 }
 \description{
 prepare_sampling_bins_city
