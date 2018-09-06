@@ -15,11 +15,10 @@ prepare_sampling_bins<-function(a,b,start_end,number_of_bins=5) {
   p4s<-proj4string(a)
 
   polygon<-merge_area(a,b)
-  message(polygon@polygons %>% length," ",
-          is(polygon)," ",area(polygon))
-  message(bbox(polygon))
+
+
   ex_matrix<-sp::bbox(polygon)
-  message(ex_matrix)
+
   extent_polygon<-extent_to_polygon(polygon)
 
   line1_spatial<-start_end %>%
