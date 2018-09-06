@@ -17,8 +17,11 @@ prepare_sampling_bins<-function(a,b,start_end,number_of_bins=5) {
   polygon<-merge_area(a,b)
   message(polygon@polygons %>% length," ",
           is(polygon)," ",area(polygon))
+  message(extent(polygon))
+  ex_matrix<-raster::extent(polygon)
+  message(ex_matrix)
 
-  ex_matrix<-raster::extent(polygon) %>%
+  ex_matrix<-ex_matrix %>%
     as.matrix
   message(ex_matrix)
   extent_polygon<-extent_to_polygon(polygon)
