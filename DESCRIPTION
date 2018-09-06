@@ -17,4 +17,5 @@ Imports: dplyr,
     rgdal,
     rgeos,
     raster,
-    fasterize
+    fasterize,
+    sp
