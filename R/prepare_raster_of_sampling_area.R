@@ -16,8 +16,8 @@ prepare_raster_of_sampling_area<-function(pop_raster,area_polygon) {
 
   # convert polygon to raster
   area_raster<-fasterize(area_polygon %>%
-                             st_as_sf,
-                           pop_raster)
+                             st_as_sf(),
+                         cropped_raster)
 
   # mask cropped_raster to area_raster
   mask(cropped_raster,area_raster)
