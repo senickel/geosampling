@@ -14,7 +14,7 @@ data_normalization_non_pair<-function(sample_obj,name) {
   sample_obj@data$country_id<-name
 
   sample_obj@data$Name<-sample_obj@data %>%
-    dplyr::select(country_id,bin_id,red_id) %>%
+    dplyr::select(country_id,bin_id,unit2) %>%
     apply(1,function(x) {
       paste0(x[!is.na(x)],collapse="@") %>%
         gsub(" ","",.)
@@ -24,7 +24,7 @@ data_normalization_non_pair<-function(sample_obj,name) {
     dplyr::select(contains("is_")) %>%
     apply(1,function(x) {
       if(x[1]) return("Bin")
-      return("Red")
+      return("Unit_2")
     })
 
   sample_obj@data$pop<-sample_obj@data %>%
