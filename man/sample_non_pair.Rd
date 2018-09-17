@@ -4,8 +4,8 @@
 \alias{sample_non_pair}
 \title{sample_non_pair}
 \usage{
-sample_non_pair(sampling_bins, red_raster_complete, yellow_raster_complete,
-  min_red = 1, sample_red = 200, random_number, verbose = 2)
+sample_non_pair(sampling_bins, raster_1, raster_2, min_unit2 = 1,
+  sample_unit2, random_number, verbose = 2)
 }
 \description{
 sample_non_pair

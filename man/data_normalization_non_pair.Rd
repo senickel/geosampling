@@ -4,7 +4,7 @@
 \alias{data_normalization_non_pair}
 \title{data_normalization_non_pair}
 \usage{
-data_normalization_non_pair(sample_obj, selected_part)
+data_normalization_non_pair(sample_obj, name)
 }
 \description{
 data_normalization_non_pair

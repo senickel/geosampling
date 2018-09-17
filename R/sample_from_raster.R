@@ -89,7 +89,6 @@ sample_from_raster<-function(raster_file,
 
         poly_shape_rasterized<-
           fasterize(sf = poly_shape_sf,raster = cropped_raster)
-        # polygonsToRaster_forked(poly_shape,cropped_raster)
 
         masked<-mask(cropped_raster,poly_shape_rasterized)
         ((masked %>%

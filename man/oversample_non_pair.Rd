@@ -4,8 +4,8 @@
 \alias{oversample_non_pair}
 \title{oversample_non_pair}
 \usage{
-oversample_non_pair(bins, original_min_red = 2,
-  original_sample_red = 200, by_factor = 1.1)
+oversample_non_pair(bins, original_min_unit2 = 2,
+  original_sample_unit2 = 200, by_factor = 1.1)
 }
 \description{
 oversample_non_pair

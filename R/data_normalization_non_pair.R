@@ -10,8 +10,8 @@
 #' @importFrom magrittr %>%
 #'
 #'
-data_normalization_non_pair<-function(sample_obj,selected_part) {
-  sample_obj@data$country_id<-selected_part
+data_normalization_non_pair<-function(sample_obj,name) {
+  sample_obj@data$country_id<-name
 
   sample_obj@data$Name<-sample_obj@data %>%
     dplyr::select(country_id,bin_id,red_id) %>%
