@@ -4,8 +4,8 @@
 \alias{oversample_pair}
 \title{oversample_pair}
 \usage{
-oversample_pair(bins, original_min_blue = 2, original_sample_blue = 50,
-  by_factor = 2)
+oversample_pair(bins, original_min_unit3 = 2,
+  original_sample_unit3 = 50, by_factor = 2)
 }
 \description{
 oversample_pair

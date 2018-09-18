@@ -24,9 +24,10 @@ oversample_wrapper_non_pair<-function(
   random_number,
   original_min_unit2=2,
   original_sample_unit2=200,
-  by_factor=1.1) {
+  by_factor=1.1,
+  verbose=2) {
 
-  message(name)
+  if (verbose > 0) message(name)
   # raster_1<-raster(paste0("../preparations/sampling_rasters/",name,".tif"))
   # raster_2<-raster(paste0("../preparations/sampling_rasters/",name,"_1k.tif"))
   # blue<-raster(paste0("../preparations/sampling_rasters/",name,"_5k.tif"))
@@ -46,7 +47,8 @@ oversample_wrapper_non_pair<-function(
     raster_1 = raster_1,
     min_unit2 = original_min_unit2,
     sample_unit2 = original_sample_unit2,
-    random_number = random_number)
+    random_number = random_number,
+    verbose = verbose)
 
   normal_sample2<-data_normalization_non_pair(
     sample_obj = normal_sample1,
@@ -58,7 +60,8 @@ oversample_wrapper_non_pair<-function(
     raster_1 = raster_1,
     min_unit2 = oversampled_values["min_unit2"],
     sample_unit2 = oversampled_values["sample_unit2"],
-    random_number = random_number)
+    random_number = random_number,
+    verbose = verbose)
 
   samp2<-data_normalization_non_pair(
     samp1,

@@ -1,7 +1,7 @@
 #' data_normalization_pair
 #'
 #' @param sample_obj
-#' @param selected_part
+#' @param name
 #' @keywords
 #' @keywords
 #' @export
@@ -11,8 +11,8 @@
 #' @useDynLib geosampling
 #' @importFrom Rcpp sourceCpp
 #'
-data_normalization_pair<-function(sample_obj,selected_part) {
-  sample_obj@data$country_id<-selected_part
+data_normalization_pair<-function(sample_obj,name) {
+  sample_obj@data$country_id<-name
 
   sample_obj@data$Name<-sample_obj@data %>%
     dplyr::select(country_id,bin_id,blue_id,red_id) %>%
@@ -25,8 +25,8 @@ data_normalization_pair<-function(sample_obj,selected_part) {
     dplyr::select(contains("is_")) %>%
     apply(1,function(x) {
       if(x[1]) return("Bin")
-      if(x[2]) return("Blue")
-      return("Red")
+      if(x[2]) return("Unit_3")
+      return("Unit_2")
     })
 
   sample_obj@data$pop<-sample_obj@data %>%

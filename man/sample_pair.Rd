@@ -4,9 +4,8 @@
 \alias{sample_pair}
 \title{sample_pair}
 \usage{
-sample_pair(sampling_bins, blue_raster_complete, red_raster_complete,
-  yellow_raster_complete, min_blue = 1, sample_blue = 100,
-  sample_red = 2, random_number, verbose = 2)
+sample_pair(sampling_bins, raster_1, raster_2, raster_3, min_unit3 = 1,
+  sample_unit3 = 100, sample_unit2 = 2, random_number, verbose = 2)
 }
 \description{
 sample_pair

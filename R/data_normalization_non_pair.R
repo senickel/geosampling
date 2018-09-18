@@ -14,7 +14,7 @@ data_normalization_non_pair<-function(sample_obj,name) {
   sample_obj@data$country_id<-name
 
   sample_obj@data$Name<-sample_obj@data %>%
-    dplyr::select(country_id,bin_id,unit2) %>%
+    dplyr::select(country_id,bin_id,unit2_id) %>%
     apply(1,function(x) {
       paste0(x[!is.na(x)],collapse="@") %>%
         gsub(" ","",.)

@@ -4,8 +4,9 @@
 \alias{oversample_wrapper_pair}
 \title{oversample_wrapper_pair}
 \usage{
-oversample_wrapper_pair(selected_part, random_number,
-  original_min_blue = 1, original_sample_blue = 200, by_factor = 1.1)
+oversample_wrapper_pair(name, bins, raster_1, raster_2, raster_3,
+  random_number, original_min_unit3 = 1, original_sample_unit3 = 200,
+  by_factor = 1.1, verbose = 2)
 }
 \description{
 oversample_wrapper_pair

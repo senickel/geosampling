@@ -6,7 +6,7 @@
 \usage{
 oversample_wrapper_non_pair(name, bins, raster_1, raster_2, random_number,
   original_min_unit2 = 2, original_sample_unit2 = 200,
-  by_factor = 1.1)
+  by_factor = 1.1, verbose = 2)
 }
 \description{
 oversample_wrapper_non_pair
