@@ -4,7 +4,7 @@
 \alias{cover_val}
 \title{cover_val}
 \usage{
-cover_val(x)
+cover_val(x, size = 30L)
 }
 \arguments{
 \item{x}{A single integer.}

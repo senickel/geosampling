@@ -67,7 +67,7 @@ sample_pair<-function(
                   raster_part_unit3_crop,
                   getCover=TRUE)
 
-      cover_values<-cover_val(getValues(raster_part_unit3_cover))
+      cover_values<-cover_val(getValues(raster_part_unit3_cover),size = 15)
       data.frame(bin=x,diff=0,amount=cover_values[cover_values>0] %>%
                    length,reached=FALSE)
 
@@ -164,10 +164,10 @@ sample_pair<-function(
                 raster_part_unit3_crop,
                 getCover=TRUE)
 
-    # set to 0 when cover is less than 30%
-    # in other words: do not sample pixels that lie with less than 30%
+    # set to 0 when cover is less than 15%
+    # in other words: do not sample pixels that lie with less than 15%
     # inside of the bin
-    cover_values<-cover_val(getValues(raster_part_unit3_cover))
+    cover_values<-cover_val(getValues(raster_part_unit3_cover), size = 15)
 
     # reduce the number of people living in that pixel by the coverage
     # so that we do not assume that a pixel has a lot of people in it if it

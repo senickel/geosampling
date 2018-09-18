@@ -5,7 +5,7 @@
 #' @param x A single integer.
 #' @useDynLib geosampling
 #' @importFrom Rcpp sourceCpp
-cover_val <- function(x) {
-    .Call('_geosampling_cover_val', PACKAGE = 'geosampling', x)
+cover_val <- function(x, size = 30L) {
+    .Call('_geosampling_cover_val', PACKAGE = 'geosampling', x, size)
 }
 

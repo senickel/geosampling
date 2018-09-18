@@ -6,19 +6,20 @@
 using namespace Rcpp;
 
 // cover_val
-NumericVector cover_val(const NumericVector& x);
-RcppExport SEXP _geosampling_cover_val(SEXP xSEXP) {
+NumericVector cover_val(const NumericVector& x, int size);
+RcppExport SEXP _geosampling_cover_val(SEXP xSEXP, SEXP sizeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(cover_val(x));
+    Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cover_val(x, size));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_geosampling_cover_val", (DL_FUNC) &_geosampling_cover_val, 1},
+    {"_geosampling_cover_val", (DL_FUNC) &_geosampling_cover_val, 2},
     {NULL, NULL, 0}
 };
 

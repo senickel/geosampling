@@ -88,7 +88,7 @@ sample_non_pair<-function(
     # set to 0 when cover is less than 30%
     # in other words: do not sample pixels that lie with less than 30%
     # inside of the bin
-    cover_values<-cover_val(getValues(raster_part_unit2_cover))
+    cover_values<-cover_val(getValues(raster_part_unit2_cover),size =30)
 
 
     # reduce the number of people living in that pixel by the coverage
