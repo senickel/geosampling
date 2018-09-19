@@ -51,9 +51,12 @@ data_normalization_pair<-function(sample_obj,name) {
 
   sample_obj@data<-sample_obj@data[,!grepl("_",colnames(sample_obj@data))]
 
+  sample_obj <- .add_centroid(sample_obj)
+
   sample_obj@data$Description<-sample_obj@data %>%
     apply(1,function(x) paste0("Type: ",x[2],"; Probability:",round(x[4] %>%
-                                                                      as.numeric,2)))
+                                                                      as.numeric,2),
+                               "; Lat/Long: ",paste(x[6],x[5],sep=", ")))
 
   sample_obj
 }
