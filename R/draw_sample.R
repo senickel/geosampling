@@ -23,7 +23,12 @@ draw_sample<-function(poly,
   sample_size<-orig_sample_size
 
   if ((index %>% length)<=sample_size) { # if there are less units to
-    drawn_sample<-index                  # sample than aimed for sample all
+
+    drawn_sample <- sample(index,
+                           size=length(index),
+                           prob=probability,
+                           replace = FALSE)                  # sample than aimed for sample all
+
   } else {                                    # if this is not the case
     set.seed(seed)
     drawn_sample<-                            # select the sample WITHOUT replacing them
