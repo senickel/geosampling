@@ -18,4 +18,5 @@ Imports: dplyr,
     rgeos,
     raster,
     fasterize,
-    sp
+    sp,
+    glue
