@@ -18,6 +18,7 @@ prepare_sampling_bins_city<-function(adm0,coords,lakes,radius_inner_circle=25,ra
   if (any(is.na(suppressWarnings(as.numeric(coords))))) stop("Coordinates are not numeric.")
   if (!is(adm0,"SpatialPolygons")) stop("adm0 is not a SpatialPolygon")
   if (!is(lakes,"SpatialPolygons")) stop("lakes is not a SpatialPolygon")
+  if (any(is.factor(coords))) stop("coords are not allowed to be factors. Numeric or character only.")
 
  if (is.data.frame(coords)|is.vector(coords)) {
     coords<-coords %>%
