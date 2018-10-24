@@ -206,10 +206,19 @@ sample_pair<-function(
       # message(i)
       unit1_raster2<-crop(unit1_raster,unit2_raster[[i]])
 
+      getValues(unit2_raster[[i]]) %>%
+        is.na() %>%
+        `t` %>%
+        length
+
       sample_from_raster(raster_file = unit2_raster[[i]],
                          poly_shape = poly_shape,
 
-                         sample_size = sample_unit2,
+                         sample_size =   getValues(unit2_raster[[i]]) %>%
+                           is.na() %>%
+                           `t` %>%
+                           length,
+                         # sample_unit2,
                          seed = random_number,
                          check_raster = unit1_raster2,
                          verbose=verbose) %>%
