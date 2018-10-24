@@ -88,7 +88,7 @@ sample_non_pair<-function(
     # set to 0 when cover is less than 30%
     # in other words: do not sample pixels that lie with less than 30%
     # inside of the bin
-    cover_values<-cover_val(getValues(raster_part_unit2_cover),size =30)
+    cover_values<-cover_val(getValues(raster_part_unit2_cover)*100,size =30)
 
 
     # reduce the number of people living in that pixel by the coverage
@@ -96,7 +96,7 @@ sample_non_pair<-function(
     # only lies in parts in the bin in question
     unit2_raster<-setValues(raster_part_unit2_crop,
                           getValues(raster_part_unit2_crop)*
-                            cover_values/100)
+                            cover_values)
 
     # cut raster_1 to bin
     unit1_raster<-crop(raster_1,poly_shape)

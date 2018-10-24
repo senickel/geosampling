@@ -67,7 +67,7 @@ sample_pair<-function(
                   raster_part_unit3_crop,
                   getCover=TRUE)
 
-      cover_values<-cover_val(getValues(raster_part_unit3_cover),size = 15)
+      cover_values<-cover_val(getValues(raster_part_unit3_cover)*100,size = 15)
       data.frame(bin=x,diff=0,amount=cover_values[cover_values>0] %>%
                    length,reached=FALSE)
 
@@ -167,14 +167,14 @@ sample_pair<-function(
     # set to 0 when cover is less than 15%
     # in other words: do not sample pixels that lie with less than 15%
     # inside of the bin
-    cover_values<-cover_val(getValues(raster_part_unit3_cover), size = 15)
+    cover_values<-cover_val(getValues(raster_part_unit3_cover)*100, size = 15)
 
     # reduce the number of people living in that pixel by the coverage
     # so that we do not assume that a pixel has a lot of people in it if it
     # only lies in parts in the bin in question
     unit3_raster<-setValues(raster_part_unit3_crop,
                            getValues(raster_part_unit3_crop)*
-                             cover_values/100)
+                             cover_values)
 
     # cut yellow_raster_complete to bin
     unit1_raster<-crop(raster_1,poly_shape)
