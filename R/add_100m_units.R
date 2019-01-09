@@ -9,25 +9,25 @@
 #' @importFrom glue glue
 #'
 
-add_100m_units <- function(spj_obj) {
-  nairobi_1k_sample_complete_sf <- nairobi_1k_sample_complete %>%
+add_100m_units <- function(spj_obj,pop) {
+  spj_obj_sf <- spj_obj %>%
     st_as_sf()
 
-  unit2_sf <- c(1:sum(nairobi_1k_sample_complete_sf$type=="Bin")) %>%
+  unit2_sf <- c(1:sum(spj_obj_sf$type=="Bin")) %>%
     lapply(function(bin_number) {
 
-      bin1 <- nairobi_1k_sample_complete_sf %>%
+      bin1 <- spj_obj_sf %>%
         filter(type=="Bin") %>%
         slice(bin_number)
 
 
-      unit2 <- nairobi_1k_sample_complete_sf %>%
+      unit2 <- spj_obj_sf %>%
         filter(grepl(bin1$Name,Name)&type=="Unit_2")
 
 
       units <- lapply(1:nrow(unit2),function(unit_number) {
 
-        bin1_raster <- crop(nairobi_population,
+        bin1_raster <- crop(pop,
                             bin1 %>%
                               as("Spatial"))
 
@@ -90,7 +90,7 @@ add_100m_units <- function(spj_obj) {
            pick = "",
            almost_empty = "")
 
-  rbind(nairobi_1k_sample_complete_sf,unit2_sf %>%
+  rbind(spj_obj_sf,unit2_sf %>%
           dplyr::select(-unit1_id,-is_unit1)) %>%
     as("Spatial")
 }
