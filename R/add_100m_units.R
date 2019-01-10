@@ -39,16 +39,19 @@ add_100m_units <- function(spj_obj,pop) {
 
         sample_raster_1 <- crop(bin1_raster,samp_unit)
 
+        sample_raster_2 <- setValues(sample_raster_1,
+                                     ifelse(getValues(sample_raster_1)==0,0.0001,
+                                            getValues(sample_raster_1)))
 
         masked <- fasterize::fasterize(sf = samp_unit %>%
                                          st_as_sf(),
-                                       raster = sample_raster_1) %>%
-          mask(sample_raster_1) %>%
+                                       raster = sample_raster_2) %>%
+          mask(sample_raster_2) %>%
           getValues()
 
         sample_raster <-
-          setValues(sample_raster_1,
-                    ifelse(is.na(masked),0,getValues(sample_raster_1)))
+          setValues(sample_raster_2,
+                    ifelse(is.na(masked),0.0001,getValues(sample_raster_2)))
 
 
         res <- geosampling::sample_from_raster(

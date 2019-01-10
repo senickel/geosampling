@@ -4,7 +4,7 @@
 \alias{add_100m_units}
 \title{add_100m_units}
 \usage{
-add_100m_units(spj_obj)
+add_100m_units(spj_obj, pop)
 }
 \description{
 add_100m_units
