@@ -22,11 +22,10 @@ add_100m_units <- function(spj_obj,pop) {
 
 
       unit2 <- spj_obj_sf %>%
-        filter(grepl(bin1$Name,Name)&type=="Unit_2")
+        filter(grepl(paste0(bin1$Name,"@"),Name)&type=="Unit_2")
 
 
       units <- lapply(1:nrow(unit2),function(unit_number) {
-
         bin1_raster <- crop(pop,
                             bin1 %>%
                               as("Spatial"))
